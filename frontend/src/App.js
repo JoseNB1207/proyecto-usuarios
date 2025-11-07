@@ -1,14 +1,46 @@
-import React from 'react';
-import UserList from './ListaUsuarios';
+import UserCRUD from './UserCRUD';
+import './App.css';
 
 function App() {
-return (
-<div>
-<h1>React + MySQL Example</h1>
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
-<UserList />
-</div>
-);
+  // Verificar si hay usuario en localStorage al cargar
+  useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      try {
+        const user = JSON.parse(savedUser);
+        setCurrentUser(user);
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.error('Error al parsear usuario:', error);
+        localStorage.removeItem('user');
+      }
+    }
+  }, []);
+
+  // Manejar login exitoso
+  const handleLoginSuccess = (user) => {
+    setCurrentUser(user);
+    setIsAuthenticated(true);
+  };
+
+  // Manejar logout
+  const handleLogout = () => {
+    setCurrentUser(null);
+    setIsAuthenticated(false);
+  };
+
+  return (
+    <div className="App">
+      {!isAuthenticated ? (
+        <Login onLoginSuccess={handleLoginSuccess} />
+      ) : (
+        <UserCRUD user={currentUser} onLogout={handleLogout} />
+      )}
+    </div>
+  );
 }
 
 export default App;
