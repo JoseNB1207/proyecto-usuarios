@@ -1,5 +1,5 @@
 import React from 'react';
-import UserList from './componentes/ListaUsuarios';
+import UserList from './ListaUsuarios';
 
 function App() {
 return (
