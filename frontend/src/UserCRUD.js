@@ -125,6 +125,7 @@ function UserCRUD({ user, onLogout }) {
       {/* Header */}
       <header className="crud-header">
         <div>
+          <h1>TechCorp Solutions</h1>
           <p>Gestión de Usuarios</p>
         </div>
         <div className="user-info">

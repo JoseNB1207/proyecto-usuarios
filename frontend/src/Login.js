@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-
 function Login({ onLoginSuccess }) {
   const [formData, setFormData] = useState({
     email: '',
@@ -96,7 +95,7 @@ function Login({ onLoginSuccess }) {
 
         <div className="login-footer">
           <p>Credenciales de prueba:</p>
-          <small>Email: juan.perez@email.com | Password: 123456</small>
+          <small>Email de prueba: juan.perez@email.com y contraseña de prueba: 123456</small>
         </div>
       </div>
     </div>
