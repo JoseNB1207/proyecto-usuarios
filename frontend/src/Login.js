@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Login.css';
 
 function Login({ onLoginSuccess }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -14,7 +17,7 @@ function Login({ onLoginSuccess }) {
       ...formData,
       [e.target.name]: e.target.value
     });
-    setError(''); // Limpiar error al escribir
+    setError('');
   };
 
   const handleSubmit = async (e) => {
@@ -28,11 +31,8 @@ function Login({ onLoginSuccess }) {
         formData
       );
       
-      // Guardar usuario en localStorage
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      
-      // Notificar al componente padre
       onLoginSuccess(response.data.user);
+      navigate('/dashboard');
       
     } catch (err) {
       console.error('Error en login:', err);
@@ -48,7 +48,7 @@ function Login({ onLoginSuccess }) {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <p>Gestión de Usuarios</p>
+          <h1>Kase</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="login-form">
@@ -94,8 +94,10 @@ function Login({ onLoginSuccess }) {
         </form>
 
         <div className="login-footer">
-          <p>Credenciales de prueba:</p>
-          <small>Email de prueba: juan.perez@email.com y contraseña de prueba: 123456</small>
+          <p>¿No tienes cuenta?</p>
+          <Link to="/register" className="link-register">
+            Crear cuenta nueva
+          </Link>
         </div>
       </div>
     </div>
